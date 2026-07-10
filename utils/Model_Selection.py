@@ -8,7 +8,7 @@ from sklearn.ensemble import RandomForestClassifier,RandomForestRegressor
 from xgboost import XGBClassifier,XGBRegressor           
 from lightgbm import LGBMClassifier,LGBMRegressor       
 
-def model_Classification(X_train,X_test,y_train,y_test):
+def model_classification(X_train,X_test,y_train,y_test):
     models = {
         'SVC': SVC(),
         'decision_tree': DecisionTreeClassifier(random_state=42),
@@ -31,7 +31,7 @@ def model_Classification(X_train,X_test,y_train,y_test):
         })
     
     result_df = pd.DataFrame(result).sort_values(by='f1', ascending=False)
-    return result_df, result
+    return result_df
     
 def model_regression(X_train,X_test,y_train,y_test):
     models={
@@ -43,11 +43,7 @@ def model_regression(X_train,X_test,y_train,y_test):
     }
     
     
-    results=[]
-    X=ticket[important_col]
-    y=ticket[new_target]
-    X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=42)
-    
+    results=[]    
     for name,model in models.items():
         model.fit(X_train,y_train)
         y_pred=model.predict(X_test)
@@ -65,4 +61,4 @@ def model_regression(X_train,X_test,y_train,y_test):
         })
     
     results_df = pd.DataFrame(results).sort_values(by='R2', ascending=False)
-    return results_df,results
+    return results_df

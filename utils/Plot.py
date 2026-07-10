@@ -31,3 +31,4 @@ def plot_histplot(df,column,title=None):
     plt.title(title if title else f'Distribution of {column}')
     plt.tight_layout()
     plt.show()
+
