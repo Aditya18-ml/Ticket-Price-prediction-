@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix
 
-def featureimportance(important_col,importances):
+def featureimportance(important_col,importances,save_path):
     feature_imp_df = pd.DataFrame({
         'Feature': important_col,
         'Importance': importances
@@ -16,9 +16,10 @@ def featureimportance(important_col,importances):
     plt.xlabel('Importance Score')
     plt.ylabel('Features')
     plt.tight_layout()
-    plt.show()
+    plt.savefig(save_path)
+    plt.close()
 
-def confusionmatrix(y_test,y_pred):
+def confusionmatrix(y_test,y_pred,save_path):
     print("Classification report")
     print(classification_report(y_test, y_pred))
     
@@ -28,7 +29,9 @@ def confusionmatrix(y_test,y_pred):
     plt.title('Confusion Matrix (Actual vs Predicted Categories)')
     plt.ylabel('Actual Priority')
     plt.xlabel('Predicted Priority')
-    plt.show()
+    plt.tight_layout()
+    plt.savefig(save_path)
+    plt.close()
 
     
 def correlation(df,column):
